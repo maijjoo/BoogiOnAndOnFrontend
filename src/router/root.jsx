@@ -6,9 +6,12 @@ import {
   AdminMain,
   WorkerMain,
   ResearchMain,
+  CleaningSelectMain,
   CleaningMain,
   PickUpMain,
   CollectingMain,
+  BasicStatistics,
+  MainTrashDistribution,
 } from "../pages/lazyLoadPages.js";
 
 const root = createBrowserRouter([
@@ -33,6 +36,10 @@ const root = createBrowserRouter([
     element: <ResearchMain />,
   },
   {
+    path: "cleaningSelect",
+    element: <CleaningSelectMain />,
+  },
+  {
     path: "cleaningMain",
     element: <CleaningMain />,
   },
@@ -44,14 +51,14 @@ const root = createBrowserRouter([
     path: "collectingMain",
     element: <CollectingMain />,
   },
-  {
-    path: "newWorks",
-    element: <newWorks />,
-  },
 
   {
-    path: "adminMain",
-    element: <AdminMain />,
+    path: "basicStatistics",
+    element: <BasicStatistics />,
+  },
+  {
+    path: "mainTrashDistribution",
+    element: <MainTrashDistribution />,
   },
 ]);
 

@@ -3,6 +3,6 @@ import loginSlice from "./slices/loginSlice";
 
 export default configureStore({
   reducer: {
-    loginSlice: loginSlice,
+    login: loginSlice,
   },
 });

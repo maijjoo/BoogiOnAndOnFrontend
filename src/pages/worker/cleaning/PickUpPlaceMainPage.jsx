@@ -8,9 +8,11 @@ import MobileFooter from "../../../components/menus/MobileFooter.jsx";
 import { MainTrashList } from "../../../datas/MainTrashList.js";
 import { postAdd } from "../../../api/pickUpApi.js";
 import "../../../App.css";
+import { useAuth } from "../../../hooks/useAuth.js";
 
 const PickUpPlaceMainPage = () => {
   const navigate = useNavigate();
+  const { username, isLoggedIn } = useAuth();
 
   // State 관리
   const [pickUpPlace, setPickUpPlace] = useState(""); // 집하지 위치
@@ -20,6 +22,16 @@ const PickUpPlaceMainPage = () => {
   const [startCoords, setStartCoords] = useState(); // 좌표 정보
   const [result, setResult] = useState(false);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true); // 등록하기 버튼 상태 관리
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/", { replace: true });
+    }
+    if (result === "success") {
+      alert("등록 완료");
+      navigate("/cleaningSelect", { replace: true });
+    }
+  }, [isLoggedIn, result, navigate]);
 
   // Handle Photo Upload
   const handlePhotoUpload = (newPhotos) => {
@@ -80,7 +92,7 @@ const PickUpPlaceMainPage = () => {
         mainTrashType: mainTrashType,
         latitude: startCoords[0],
         longitude: startCoords[1],
-        submitterUsername: "W_testWorker",
+        submitterUsername: username,
       };
       const files = photos;
       const formData = new FormData();
@@ -88,7 +100,6 @@ const PickUpPlaceMainPage = () => {
       if (files !== null && files.length !== 0) {
         for (let i = 0; i < files.length; i++) {
           formData.append("files", files[i]);
-          console.log("---------files[i]", files[i]);
         }
       }
       formData.append("submitterUsername", pickUpRequestDto.submitterUsername);

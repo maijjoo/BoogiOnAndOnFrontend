@@ -31,13 +31,23 @@ const CameraController = ({ setSource }) => {
       <div className="border border-black rounded-md w-full overflow-x-auto">
         <div className="flex p-2">
           <div
-            onClick={handleSvgClick}
+            onClick={sources.length >= 30 ? null : handleSvgClick}
             className="flex-shrink-0 w-24 h-24 flex items-center justify-center cursor-pointer border border-dashed border-gray-300 rounded-md"
           >
             <img src={addImage} alt="add Image" className="w-8 h-8" />
           </div>
           {sources.map((source, index) => (
-            <div key={index} className="flex-shrink-0 w-24 h-24 mr-2">
+            <div
+              key={index}
+              className="flex-shrink-0 w-24 h-24 mr-2 cursor-pointer"
+              onClick={() => {
+                if (confirm("사진을 삭제하시겠습니까?")) {
+                  setSources(
+                    (prevSources) => prevSources.filter((_, i) => i !== index) // 현재 인덱스를 제외한 새로운 배열 생성
+                  );
+                }
+              }}
+            >
               <img
                 src={source}
                 alt={`snap-${index}`}
@@ -48,7 +58,9 @@ const CameraController = ({ setSource }) => {
         </div>
       </div>
       <div className="mt-2">
-        <p className="text-gray-500">
+        <p
+          className={`${sources.length < 3 ? "text-red-600" : "text-gray-500"}`}
+        >
           {sources.length < 3
             ? "사진을 3장 이상 첨부해주세요"
             : `${sources.length}/30`}
