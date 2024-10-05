@@ -1,7 +1,6 @@
-import { API_SERVER_HOST } from "./commonApi";
 import jwtAxios from "../util/jwtUtil";
 
-const prefix = `${API_SERVER_HOST}/api/basic-statistics`;
+const prefix = `/api/basic-statistics`;
 
 export const getBasicStatisticsApi = async (
   tapCondition,

@@ -1,7 +1,6 @@
-import { API_SERVER_HOST } from "./commonApi";
 import jwtAxios from "../util/jwtUtil";
 
-const prefix = `${API_SERVER_HOST}/api/pick-up`;
+const prefix = `/api/pick-up`;
 
 // 내 관리자 id로 등록된 모든 집하지 리스트 받아옴
 export const getSpots = async (adminId) => {

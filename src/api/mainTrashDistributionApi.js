@@ -1,7 +1,6 @@
-import { API_SERVER_HOST } from "./commonApi";
 import jwtAxios from "../util/jwtUtil";
 
-const prefix = `${API_SERVER_HOST}/api/admin`;
+const prefix = `/api/pick-up`;
 
 export const getSearched = async (searchParam) => {
   console.log(
